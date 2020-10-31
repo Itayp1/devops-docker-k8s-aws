@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  #number of pods that this should run
+  replicas: 1
+  selector:
+    #this is how thw master find the pod to update - find by the botto, label
+    matchLabels:
+      component: web
+  template:
+    #how this container will be create
+    metadata:
+      labels:
+        #every pod will be with the this label
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: stephengrider/multi-client
+          ports:
+            - containerPort: 3000

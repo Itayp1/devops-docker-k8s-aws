@@ -1,0 +1,37 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t itayp/react-test -f ./frontent-graph/Dockerfile.dev ./frontent-graph
+
+script:
+  - docker run -e CI=true itayp/react-test npm run test
+
+after_success:
+  - docker build -t itayp/multi-client ./frontent-graph
+  - docker build -t itayp/multi-nginx ./nginx
+  - docker build -t itayp/multi-server ./server
+  - docker build -t itayp/multi-worker ./redisworker
+  # Log in to the docker CLI
+  - echo "$" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push itayp/multi-client
+  - docker push itayp/multi-nginx
+  - docker push itayp/multi-server
+  - docker push itayp/multi-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: eelasticbeanstalk-us-west-1-570183718745
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

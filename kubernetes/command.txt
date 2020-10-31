@@ -1,0 +1,112 @@
+docker-compose - vs kubernates
+
+
+
+
+    #port - the port that other pod can conect to me
+    #target port  the port fowrfing the request
+
+
+
+
+start kubernates
+minikube start --driver=hyperv
+
+minikube ip
+
+
+create a pod
+kubectl apply -f client-pod.yaml
+
+servise - response on the networking
+create a service
+kubectl apply -f client-node-port.yaml
+clusterip 
+the ip that other port can comunicate wth each other
+
+remove the pod with the resource name 
+kubectl delete -f client-pod.yaml
+
+kubectl apply -f client-deployment.yaml
+
+kubectl get pods -o wide
+NAME                                 READY   STATUS    RESTARTS   AGE     IP           NODE       NOMINATED NODE   READINESS GATES
+client-deployment-5dfb6bf966-gmzql   1/1     Running   0          3m15s   172.18.0.3   minikube   <none>           <none>
+ip its a internal ip of the machine
+
+
+
+kubectl get services
+kubectl get pods
+
+kubecel describe <object type> <object name>
+kubecel describe pod client-pod
+
+docker logs dockername
+
+clean all cache 
+docker system prune -a 
+
+kube-apiserver
+my responsibality  || name i need  || i have runing
+read the deployment file and servicewe need to runing 4 copies of pod 
+so run 4 and if its run 3 copies to run one more 
+every time that docker dies its get a notification
+
+deployment
+run set of identical pods 
+monitor the state of the pods update if necessary
+whatching the pod for change 
+
+update object 
+we need uniq name or type 
+
+
+//update the image to the lastedversion 
+add tag in the inage name 
+itayp:\multi-worker:v1
+
+            change the image prop   type of object / objectname    cobtainername = new imagename
+kubectl set       image             deployment/client-deployment  client=stephengrider/multi-client:v5
+
+
+eval ($docker-dnv)
+minikube docker-env
+
+
+Kubelet service may be down. This may be due to the fact that swap is enabled.
+sudo swapoff -a
+To make it permanent go to /etc/fstab
+sudo -i
+swapoff -a
+exit
+strace -eopenat kubectl version
+sudo systemctl restart kubelet.service
+Docker service may be down, hence the kubeapi pod isn’t running
+sudo systemctl start docker
+sudo systemctl start kubele
+
+
+
+clusterip - 
+give access to pods from inside the node 
+external cant get intp this pod - not allowd traffic from putside world - 
+
+nodeport - export set of pods to the outsideworld
+good only for dev
+
+
+ kubectl describe    storageclass
+ kubectl get  storageclass
+
+kubectl get pv
+kubectl get pvc
+
+
+secrets
+store information in cluster
+imperative commend
+
+
+kubectl create secret generic <secret name> --from-literal key=value
+kubectl create secret generic pgpassword --from-literal pgpassword=password123

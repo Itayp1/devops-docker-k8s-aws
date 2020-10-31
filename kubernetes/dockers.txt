@@ -1,0 +1,2 @@
+docker builds . 
+docker push and name send image to docker hub

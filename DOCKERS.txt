@@ -1,0 +1,84 @@
+docker exec -it container-id  /bin/bash 
+docker exec -it container-id  -command-
+docker exec -it 8351e86342f2 sh
+//exec add a second process inside runing docker
+
+
+it its input and t is style
+docker run -it simpleapp sh
+
+
+docker ps 
+docker ps -all
+
+your dockerid /projectname:version
+docker build -t itayp\redis .
+create dokcer 
+
+to create container 
+docker run and put the id of the docker 
+
+mapinng ports
+ docker run  -p 5000:3000  simpleapp
+
+ dockerfile 
+ workdir /usr/app 
+ anny following command after this comand will work on the workdir relative 
+
+
+  docker build -t simpleapp .
+
+your dockerid /projectname:version
+docker build -t itayp\redis .
+
+
+start docker 
+docker run myimage 
+
+start docker compoose and build for the first time
+ docker-compose up 
+
+ build 
+ docker 
+ docker build .
+ docker run my image 
+
+ compoose 
+ docker-compose up --build // rebuild
+
+
+ running container in background docker run -d redis 
+
+
+ docker-compose up -d 
+ docker-compose down
+
+ restart polcies 
+ "no"
+ always
+ on-failure
+ unless-stoped
+
+
+ docker-compose ps  // see list of containers
+ its search docker-compose file on your current dir and show the docker from that file
+
+
+ build from difrent dockefile 
+
+ docker build -f Dockerfile.dev
+
+  docker build -f Dockerfile.dev .
+
+  volumes
+  -v /app/node_modules  - mean that this folder will not overide by any other volume 
+  -v ${pwd:app  take app from current runing the comand into the docker pwd 
+
+
+  docker-compose down && docker-compose up --build
+
+
+  docker run let us see stout 
+  docker with it let us the in 
+
+  docker exec -it gkfdgjdof npm run test

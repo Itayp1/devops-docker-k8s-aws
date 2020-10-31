@@ -1,0 +1,11 @@
+version: "3"
+services:
+  redis-server:
+    image: "redis"
+  node-app:
+    restart: on-failure
+    build: .
+    ports:
+      - "4001:8081"
+#services - service is dontainer
+#    build: . look in the current directory for the build docker
